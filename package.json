@@ -11,13 +11,15 @@
     "test": "tree-sitter test",
     "build:node": "node-gyp rebuild",
     "test:node": "node --test bindings/node/binding_test.js test/bindings/node.test.js",
-    "build:dll": "node -e \"require('fs').mkdirSync('build', { recursive: true })\" && clang -O2 -DNDEBUG -shared -I src src/parser.c src/scanner.c -o build/tree-sitter-kusto.dll -fuse-ld=lld -Wl,/opt:ref -Wl,/opt:icf"
+    "build:dll": "node -e \"require('fs').mkdirSync('build', { recursive: true })\" && clang -O2 -DNDEBUG -shared -I src src/parser.c src/scanner.c -o build/tree-sitter-kusto.dll -fuse-ld=lld -Wl,/opt:ref -Wl,/opt:icf && node -e \"require('fs').copyFileSync('build/tree-sitter-kusto.dll', 'build/libtree-sitter-kusto.dll')\"",
+    "test:emacs": "emacs -Q --batch -L lisp -L test/lisp -l test/lisp/kusto-ts-mode-tests.el -f ert-run-tests-batch-and-exit"
   },
   "files": [
     "binding.gyp",
     "bindings/node/**",
     "!bindings/node/binding_test.js",
     "grammar.js",
+    "lisp/**",
     "src/**",
     "queries/**",
     "tree-sitter.json"
