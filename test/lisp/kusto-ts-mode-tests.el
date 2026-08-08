@@ -132,6 +132,15 @@
      (equal (buffer-string)
             "let F = (\n  a:string,\n  b:int,\n  c:long\n) { T };"))))
 
+(ert-deftest kusto-ts-mode-indents-new-lines-inside-brackets ()
+  (dolist (case '(("print strcat(" . "print strcat(\n  ")
+                  ("print dynamic([" . "print dynamic([\n    ")
+                  ("let F = () {\n  T" . "let F = () {\n  T\n  ")))
+    (kusto-ts-test-with-buffer (car case)
+      (goto-char (point-max))
+      (newline-and-indent)
+      (should (equal (buffer-string) (cdr case))))))
+
 (ert-deftest kusto-ts-mode-builds-imenu ()
   (kusto-ts-test-with-buffer
       "let F = () { T };\nlet V = view () { T };\n.show queries"

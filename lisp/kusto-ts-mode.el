@@ -43,20 +43,32 @@
         (list (cons point point))))))
 
 (defun kusto-ts-mode--indent (node parent bol)
-  "Indent using the primary parser when a local command parser is active."
-  (let ((primary-node
-         (and (boundp 'treesit-primary-parser)
-              treesit-primary-parser
-              (treesit-node-at bol treesit-primary-parser t))))
-    (if (and primary-node
-             (equal (treesit-node-type primary-node) "command_brace_body"))
-        (cons (save-excursion
-                (goto-char (treesit-node-start primary-node))
-                (line-beginning-position))
-              (if (eq (char-after bol) ?})
-                  0
-                kusto-ts-mode-indent-offset))
-      (treesit-simple-indent node parent bol))))
+  "Return indentation for NODE at BOL, including incomplete syntax."
+  (if (null node)
+      (cons bol
+            (* (max 0
+                    (- (car (syntax-ppss bol))
+                       (save-excursion
+                         (goto-char bol)
+                         (back-to-indentation)
+                         (if (memq (char-after)
+                                   (list ?\) ?\] ?\}))
+                             1
+                           0))))
+               kusto-ts-mode-indent-offset))
+    (let ((primary-node
+           (and (boundp 'treesit-primary-parser)
+                treesit-primary-parser
+                (treesit-node-at bol treesit-primary-parser t))))
+      (if (and primary-node
+               (equal (treesit-node-type primary-node) "command_brace_body"))
+          (cons (save-excursion
+                  (goto-char (treesit-node-start primary-node))
+                  (line-beginning-position))
+                (if (eq (char-after bol) ?})
+                    0
+                  kusto-ts-mode-indent-offset))
+        (treesit-simple-indent node parent bol)))))
 
 (defun kusto-ts-mode--node-name (node)
   "Return NODE's Kusto name field."
