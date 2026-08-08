@@ -1,0 +1,37 @@
+{
+  "name": "tree-sitter-kusto",
+  "version": "1.0.0",
+  "description": "Kusto Query Language (KQL) grammar for tree-sitter",
+  "type": "module",
+  "gypfile": true,
+  "main": "bindings/node/index.js",
+  "types": "bindings/node/index.d.ts",
+  "scripts": {
+    "generate": "tree-sitter generate",
+    "test": "tree-sitter test",
+    "build:node": "node-gyp rebuild",
+    "test:node": "node --test bindings/node/binding_test.js test/bindings/node.test.js",
+    "build:dll": "node -e \"require('fs').mkdirSync('build', { recursive: true })\" && clang -O2 -DNDEBUG -shared -I src src/parser.c src/scanner.c -o build/tree-sitter-kusto.dll -fuse-ld=lld -Wl,/opt:ref -Wl,/opt:icf"
+  },
+  "files": [
+    "binding.gyp",
+    "bindings/node/**",
+    "!bindings/node/binding_test.js",
+    "grammar.js",
+    "src/**",
+    "queries/**",
+    "tree-sitter.json"
+  ],
+  "author": "Amaan Qureshi",
+  "license": "MIT",
+  "repository": "https://github.com/kiennq/tree-sitter-kusto",
+  "dependencies": {
+    "node-addon-api": "^8.9.1",
+    "node-gyp-build": "^4.8.4"
+  },
+  "devDependencies": {
+    "node-gyp": "^12.3.0",
+    "tree-sitter": "^0.25.1",
+    "tree-sitter-cli": "0.26.11"
+  }
+}

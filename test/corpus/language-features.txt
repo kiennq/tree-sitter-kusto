@@ -1,0 +1,757 @@
+==================
+opaque literal constructors
+==================
+print long(-1), int(-1), real(-1.5), decimal(-1.5), datetime(null), datetime("2026-08-06")
+---
+
+(source_file
+  (query
+    (statement
+      (query_statement
+        (expression
+          (pipe_expression
+            (before_pipe_expression
+              (print_operator
+                (named_expression
+                  (unnamed_expression
+                    (logical_or_expression
+                      (logical_and_expression
+                        (equality_expression
+                          (relational_expression
+                            (additive_expression
+                              (multiplicative_expression
+                                (string_operator_expression
+                                  (string_binary_operator_expression
+                                    (invocation_expression
+                                      (function_call_or_path_expression
+                                        (function_call_or_path_root
+                                          (primary_expression
+                                            (unsigned_literal_expression
+                                              (long_literal_expression))))))))))))))))
+                (named_expression
+                  (unnamed_expression
+                    (logical_or_expression
+                      (logical_and_expression
+                        (equality_expression
+                          (relational_expression
+                            (additive_expression
+                              (multiplicative_expression
+                                (string_operator_expression
+                                  (string_binary_operator_expression
+                                    (invocation_expression
+                                      (function_call_or_path_expression
+                                        (function_call_or_path_root
+                                          (primary_expression
+                                            (unsigned_literal_expression
+                                              (int_literal_expression))))))))))))))))
+                (named_expression
+                  (unnamed_expression
+                    (logical_or_expression
+                      (logical_and_expression
+                        (equality_expression
+                          (relational_expression
+                            (additive_expression
+                              (multiplicative_expression
+                                (string_operator_expression
+                                  (string_binary_operator_expression
+                                    (invocation_expression
+                                      (function_call_or_path_expression
+                                        (function_call_or_path_root
+                                          (primary_expression
+                                            (unsigned_literal_expression
+                                              (real_literal_expression))))))))))))))))
+                (named_expression
+                  (unnamed_expression
+                    (logical_or_expression
+                      (logical_and_expression
+                        (equality_expression
+                          (relational_expression
+                            (additive_expression
+                              (multiplicative_expression
+                                (string_operator_expression
+                                  (string_binary_operator_expression
+                                    (invocation_expression
+                                      (function_call_or_path_expression
+                                        (function_call_or_path_root
+                                          (primary_expression
+                                            (unsigned_literal_expression
+                                              (decimal_literal_expression))))))))))))))))
+                (named_expression
+                  (unnamed_expression
+                    (logical_or_expression
+                      (logical_and_expression
+                        (equality_expression
+                          (relational_expression
+                            (additive_expression
+                              (multiplicative_expression
+                                (string_operator_expression
+                                  (string_binary_operator_expression
+                                    (invocation_expression
+                                      (function_call_or_path_expression
+                                        (function_call_or_path_root
+                                          (primary_expression
+                                            (unsigned_literal_expression
+                                              (date_time_literal_expression))))))))))))))))
+                (named_expression
+                  (unnamed_expression
+                    (logical_or_expression
+                      (logical_and_expression
+                        (equality_expression
+                          (relational_expression
+                            (additive_expression
+                              (multiplicative_expression
+                                (string_operator_expression
+                                  (string_binary_operator_expression
+                                    (invocation_expression
+                                      (function_call_or_path_expression
+                                        (function_call_or_path_root
+                                          (primary_expression
+                                            (unsigned_literal_expression
+                                              (date_time_literal_expression))))))))))))))))))))))))
+
+==================
+negative JSON real
+==================
+print dynamic({"a": -1.5})
+---
+
+(source_file
+  (query
+    (statement
+      (query_statement
+        (expression
+          (pipe_expression
+            (before_pipe_expression
+              (print_operator
+                (named_expression
+                  (unnamed_expression
+                    (logical_or_expression
+                      (logical_and_expression
+                        (equality_expression
+                          (relational_expression
+                            (additive_expression
+                              (multiplicative_expression
+                                (string_operator_expression
+                                  (string_binary_operator_expression
+                                    (invocation_expression
+                                      (function_call_or_path_expression
+                                        (function_call_or_path_root
+                                          (primary_expression
+                                            (unsigned_literal_expression
+                                              (dynamic_literal_expression
+                                                (json_value
+                                                  (json_object
+                                                    (json_pair
+                                                      (string_literal
+                                                        (double_quoted_string))
+                                                      (json_value
+                                                        (json_real
+                                                          (real_literal_expression
+                                                            (real_number)))))))))))))))))))))))))))))))
+
+==================
+pinned string operators
+==================
+T | where name notlike "x" and name notlikecs "y" and name notcontains "z" and name notcontainscs "w" and name : "v"
+---
+
+(source_file
+  (query
+    (statement
+      (query_statement
+        (expression
+          (pipe_expression
+            (before_pipe_expression
+              (unnamed_expression
+                (logical_or_expression
+                  (logical_and_expression
+                    (equality_expression
+                      (relational_expression
+                        (additive_expression
+                          (multiplicative_expression
+                            (string_operator_expression
+                              (string_binary_operator_expression
+                                (invocation_expression
+                                  (function_call_or_path_expression
+                                    (function_call_or_path_root
+                                      (primary_expression
+                                        (name_reference_with_data_scope
+                                          (simple_name_reference
+                                            (identifier_or_keyword_or_escaped_name
+                                              (identifier_name
+                                                (identifier)))))))))))))))))))
+            (piped_operator
+              (after_pipe_operator
+                (where_operator
+                  (named_expression
+                    (unnamed_expression
+                      (logical_or_expression
+                        (logical_and_expression
+                          (equality_expression
+                            (relational_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (string_operator_expression
+                                    (string_binary_operator_expression
+                                      (invocation_expression
+                                        (function_call_or_path_expression
+                                          (function_call_or_path_root
+                                            (primary_expression
+                                              (name_reference_with_data_scope
+                                                (simple_name_reference
+                                                  (identifier_or_keyword_or_escaped_name
+                                                    (identifier_name
+                                                      (identifier)))))))))
+                                      (string_binary_operator)
+                                      (invocation_expression
+                                        (function_call_or_path_expression
+                                          (function_call_or_path_root
+                                            (primary_expression
+                                              (unsigned_literal_expression
+                                                (string_literal_expression
+                                                  (string_literal
+                                                    (double_quoted_string))))))))))))))
+                          (equality_expression
+                            (relational_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (string_operator_expression
+                                    (string_binary_operator_expression
+                                      (invocation_expression
+                                        (function_call_or_path_expression
+                                          (function_call_or_path_root
+                                            (primary_expression
+                                              (name_reference_with_data_scope
+                                                (simple_name_reference
+                                                  (identifier_or_keyword_or_escaped_name
+                                                    (identifier_name
+                                                      (identifier)))))))))
+                                      (string_binary_operator)
+                                      (invocation_expression
+                                        (function_call_or_path_expression
+                                          (function_call_or_path_root
+                                            (primary_expression
+                                              (unsigned_literal_expression
+                                                (string_literal_expression
+                                                  (string_literal
+                                                    (double_quoted_string))))))))))))))
+                          (equality_expression
+                            (relational_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (string_operator_expression
+                                    (string_binary_operator_expression
+                                      (invocation_expression
+                                        (function_call_or_path_expression
+                                          (function_call_or_path_root
+                                            (primary_expression
+                                              (name_reference_with_data_scope
+                                                (simple_name_reference
+                                                  (identifier_or_keyword_or_escaped_name
+                                                    (identifier_name
+                                                      (identifier)))))))))
+                                      (string_binary_operator)
+                                      (invocation_expression
+                                        (function_call_or_path_expression
+                                          (function_call_or_path_root
+                                            (primary_expression
+                                              (unsigned_literal_expression
+                                                (string_literal_expression
+                                                  (string_literal
+                                                    (double_quoted_string))))))))))))))
+                          (equality_expression
+                            (relational_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (string_operator_expression
+                                    (string_binary_operator_expression
+                                      (invocation_expression
+                                        (function_call_or_path_expression
+                                          (function_call_or_path_root
+                                            (primary_expression
+                                              (name_reference_with_data_scope
+                                                (simple_name_reference
+                                                  (identifier_or_keyword_or_escaped_name
+                                                    (identifier_name
+                                                      (identifier)))))))))
+                                      (string_binary_operator)
+                                      (invocation_expression
+                                        (function_call_or_path_expression
+                                          (function_call_or_path_root
+                                            (primary_expression
+                                              (unsigned_literal_expression
+                                                (string_literal_expression
+                                                  (string_literal
+                                                    (double_quoted_string))))))))))))))
+                          (equality_expression
+                            (relational_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (string_operator_expression
+                                    (string_binary_operator_expression
+                                      (invocation_expression
+                                        (function_call_or_path_expression
+                                          (function_call_or_path_root
+                                            (primary_expression
+                                              (name_reference_with_data_scope
+                                                (simple_name_reference
+                                                  (identifier_or_keyword_or_escaped_name
+                                                    (identifier_name
+                                                      (identifier)))))))))
+                                      (invocation_expression
+                                        (function_call_or_path_expression
+                                          (function_call_or_path_root
+                                            (primary_expression
+                                              (unsigned_literal_expression
+                                                (string_literal_expression
+                                                  (string_literal
+                                                    (double_quoted_string)))))))))))))))))))))))))))
+
+==================
+star operators
+==================
+* has "x"
+---
+
+(source_file
+  (query
+    (statement
+      (query_statement
+        (expression
+          (pipe_expression
+            (before_pipe_expression
+              (unnamed_expression
+                (logical_or_expression
+                  (logical_and_expression
+                    (equality_expression
+                      (relational_expression
+                        (additive_expression
+                          (multiplicative_expression
+                            (string_operator_expression
+                              (string_star_operator_expression
+                                (string_binary_operator)
+                                (invocation_expression
+                                  (function_call_or_path_expression
+                                    (function_call_or_path_root
+                                      (primary_expression
+                                        (unsigned_literal_expression
+                                          (string_literal_expression
+                                            (string_literal
+                                              (double_quoted_string))))))))))))))))))))))))
+
+==================
+star equality
+==================
+* == "x"
+---
+
+(source_file
+  (query
+    (statement
+      (query_statement
+        (expression
+          (pipe_expression
+            (before_pipe_expression
+              (unnamed_expression
+                (logical_or_expression
+                  (logical_and_expression
+                    (equality_expression
+                      (star_equality_expression
+                        (relational_expression
+                          (additive_expression
+                            (multiplicative_expression
+                              (string_operator_expression
+                                (string_binary_operator_expression
+                                  (invocation_expression
+                                    (function_call_or_path_expression
+                                      (function_call_or_path_root
+                                        (primary_expression
+                                          (unsigned_literal_expression
+                                            (string_literal_expression
+                                              (string_literal
+                                                (double_quoted_string)))))))))))))))))))))))))
+
+==================
+timespan spellings and constructors
+==================
+print 1hrs, time(1h), timespan(1h)
+---
+
+(source_file
+  (query
+    (statement
+      (query_statement
+        (expression
+          (pipe_expression
+            (before_pipe_expression
+              (print_operator
+                (named_expression
+                  (unnamed_expression
+                    (logical_or_expression
+                      (logical_and_expression
+                        (equality_expression
+                          (relational_expression
+                            (additive_expression
+                              (multiplicative_expression
+                                (string_operator_expression
+                                  (string_binary_operator_expression
+                                    (invocation_expression
+                                      (function_call_or_path_expression
+                                        (function_call_or_path_root
+                                          (primary_expression
+                                            (unsigned_literal_expression
+                                              (time_span_literal_expression
+                                                (time_span_literal)))))))))))))))))
+                (named_expression
+                  (unnamed_expression
+                    (logical_or_expression
+                      (logical_and_expression
+                        (equality_expression
+                          (relational_expression
+                            (additive_expression
+                              (multiplicative_expression
+                                (string_operator_expression
+                                  (string_binary_operator_expression
+                                    (invocation_expression
+                                      (function_call_or_path_expression
+                                        (function_call_or_path_root
+                                          (primary_expression
+                                            (unsigned_literal_expression
+                                              (time_span_literal_expression))))))))))))))))
+                (named_expression
+                  (unnamed_expression
+                    (logical_or_expression
+                      (logical_and_expression
+                        (equality_expression
+                          (relational_expression
+                            (additive_expression
+                              (multiplicative_expression
+                                (string_operator_expression
+                                  (string_binary_operator_expression
+                                    (invocation_expression
+                                      (function_call_or_path_expression
+                                        (function_call_or_path_root
+                                          (primary_expression
+                                            (unsigned_literal_expression
+                                              (time_span_literal_expression))))))))))))))))))))))))
+
+==================
+scoped function call
+==================
+scope.function()
+---
+
+(source_file
+  (query
+    (statement
+      (query_statement
+        (expression
+          (pipe_expression
+            (before_pipe_expression
+              (scoped_function_call_expression
+                (simple_name_reference
+                  (identifier_or_keyword_or_escaped_name
+                    (identifier_name
+                      (identifier))))
+                (function_call_expression
+                  (named_function_call_expression
+                    (simple_name_reference
+                      (identifier_or_keyword_or_escaped_name
+                        (identifier_name
+                          (identifier))))))))))))))
+
+==================
+nooptimization and external data with clause
+==================
+print toscalar kind=nooptimization(T | take 1), totable kind=nooptimization(T | take 1), externaldata (x:string)["https://example"] with (format="csv")
+---
+
+(source_file
+  (query
+    (statement
+      (query_statement
+        (expression
+          (pipe_expression
+            (before_pipe_expression
+              (print_operator
+                (named_expression
+                  (unnamed_expression
+                    (logical_or_expression
+                      (logical_and_expression
+                        (equality_expression
+                          (relational_expression
+                            (additive_expression
+                              (multiplicative_expression
+                                (string_operator_expression
+                                  (string_binary_operator_expression
+                                    (invocation_expression
+                                      (function_call_or_path_expression
+                                        (function_call_or_path_root
+                                          (to_scalar_expression
+                                            (no_optimization_parameter)
+                                            (pipe_expression
+                                              (before_pipe_expression
+                                                (unnamed_expression
+                                                  (logical_or_expression
+                                                    (logical_and_expression
+                                                      (equality_expression
+                                                        (relational_expression
+                                                          (additive_expression
+                                                            (multiplicative_expression
+                                                              (string_operator_expression
+                                                                (string_binary_operator_expression
+                                                                  (invocation_expression
+                                                                    (function_call_or_path_expression
+                                                                      (function_call_or_path_root
+                                                                        (primary_expression
+                                                                          (name_reference_with_data_scope
+                                                                            (simple_name_reference
+                                                                              (identifier_or_keyword_or_escaped_name
+                                                                                (identifier_name
+                                                                                  (identifier)))))))))))))))))))
+                                              (piped_operator
+                                                (after_pipe_operator
+                                                  (take_operator
+                                                    (named_expression
+                                                      (unnamed_expression
+                                                        (logical_or_expression
+                                                          (logical_and_expression
+                                                            (equality_expression
+                                                              (relational_expression
+                                                                (additive_expression
+                                                                  (multiplicative_expression
+                                                                    (string_operator_expression
+                                                                      (string_binary_operator_expression
+                                                                        (invocation_expression
+                                                                          (function_call_or_path_expression
+                                                                            (function_call_or_path_root
+                                                                              (primary_expression
+                                                                                (unsigned_literal_expression
+                                                                                  (long_literal_expression
+                                                                                    (integer_literal)))))))))))))))))))))))))))))))))))
+                (named_expression
+                  (unnamed_expression
+                    (logical_or_expression
+                      (logical_and_expression
+                        (equality_expression
+                          (relational_expression
+                            (additive_expression
+                              (multiplicative_expression
+                                (string_operator_expression
+                                  (string_binary_operator_expression
+                                    (invocation_expression
+                                      (function_call_or_path_expression
+                                        (function_call_or_path_root
+                                          (to_table_expression
+                                            (no_optimization_parameter)
+                                            (pipe_expression
+                                              (before_pipe_expression
+                                                (unnamed_expression
+                                                  (logical_or_expression
+                                                    (logical_and_expression
+                                                      (equality_expression
+                                                        (relational_expression
+                                                          (additive_expression
+                                                            (multiplicative_expression
+                                                              (string_operator_expression
+                                                                (string_binary_operator_expression
+                                                                  (invocation_expression
+                                                                    (function_call_or_path_expression
+                                                                      (function_call_or_path_root
+                                                                        (primary_expression
+                                                                          (name_reference_with_data_scope
+                                                                            (simple_name_reference
+                                                                              (identifier_or_keyword_or_escaped_name
+                                                                                (identifier_name
+                                                                                  (identifier)))))))))))))))))))
+                                              (piped_operator
+                                                (after_pipe_operator
+                                                  (take_operator
+                                                    (named_expression
+                                                      (unnamed_expression
+                                                        (logical_or_expression
+                                                          (logical_and_expression
+                                                            (equality_expression
+                                                              (relational_expression
+                                                                (additive_expression
+                                                                  (multiplicative_expression
+                                                                    (string_operator_expression
+                                                                      (string_binary_operator_expression
+                                                                        (invocation_expression
+                                                                          (function_call_or_path_expression
+                                                                            (function_call_or_path_root
+                                                                              (primary_expression
+                                                                                (unsigned_literal_expression
+                                                                                  (long_literal_expression
+                                                                                    (integer_literal)))))))))))))))))))))))))))))))))))
+                (named_expression
+                  (unnamed_expression
+                    (logical_or_expression
+                      (logical_and_expression
+                        (equality_expression
+                          (relational_expression
+                            (additive_expression
+                              (multiplicative_expression
+                                (string_operator_expression
+                                  (string_binary_operator_expression
+                                    (invocation_expression
+                                      (function_call_or_path_expression
+                                        (function_call_or_path_root
+                                          (primary_expression
+                                            (external_data_expression
+                                              (row_schema
+                                                (row_schema_column_declaration
+                                                  (parameter_name
+                                                    (identifier_or_extended_keyword_or_escaped_name
+                                                      (identifier_name
+                                                        (identifier))))
+                                                  (scalar_type)))
+                                              (string_literal_expression
+                                                (string_literal
+                                                  (double_quoted_string)))
+                                              (external_data_with_clause
+                                                (external_data_with_clause_property
+                                                  (parameter_name
+                                                    (identifier_or_extended_keyword_or_escaped_name
+                                                      (identifier_name
+                                                        (identifier))))
+                                                  (string_literal_expression
+                                                    (string_literal
+                                                      (double_quoted_string))))))))))))))))))))))))))))
+
+==================
+wildcarded entity path
+==================
+T | union cluster("x").database*
+---
+
+(source_file
+  (query
+    (statement
+      (query_statement
+        (expression
+          (pipe_expression
+            (before_pipe_expression
+              (unnamed_expression
+                (logical_or_expression
+                  (logical_and_expression
+                    (equality_expression
+                      (relational_expression
+                        (additive_expression
+                          (multiplicative_expression
+                            (string_operator_expression
+                              (string_binary_operator_expression
+                                (invocation_expression
+                                  (function_call_or_path_expression
+                                    (function_call_or_path_root
+                                      (primary_expression
+                                        (name_reference_with_data_scope
+                                          (simple_name_reference
+                                            (identifier_or_keyword_or_escaped_name
+                                              (identifier_name
+                                                (identifier)))))))))))))))))))
+            (piped_operator
+              (after_pipe_operator
+                (union_operator
+                  (union_operator_expression
+                    (wildcarded_entity_expression
+                      (wildcarded_path_expression
+                        (dot_composite_function_call_expression
+                          (function_call_expression
+                            (named_function_call_expression
+                              (simple_name_reference
+                                (identifier_or_keyword_or_escaped_name
+                                  (keyword_name)))
+                              (argument_expression
+                                (named_expression
+                                  (unnamed_expression
+                                    (logical_or_expression
+                                      (logical_and_expression
+                                        (equality_expression
+                                          (relational_expression
+                                            (additive_expression
+                                              (multiplicative_expression
+                                                (string_operator_expression
+                                                  (string_binary_operator_expression
+                                                    (invocation_expression
+                                                      (function_call_or_path_expression
+                                                        (function_call_or_path_root
+                                                          (primary_expression
+                                                            (unsigned_literal_expression
+                                                              (string_literal_expression
+                                                                (string_literal
+                                                                  (double_quoted_string))))))))))))))))))))))
+                        (wildcarded_path_name
+                          (wildcarded_name
+                            (keyword_name)))))))))))))))
+
+==================
+identifier dollar continuation
+==================
+print foo$bar
+---
+
+(source_file
+  (query
+    (statement
+      (query_statement
+        (expression
+          (pipe_expression
+            (before_pipe_expression
+              (print_operator
+                (ERROR
+                  (named_expression_name_clause
+                    (identifier_or_extended_keyword_or_escaped_name
+                      (identifier_name
+                        (identifier)))))
+                (named_expression
+                  (unnamed_expression
+                    (logical_or_expression
+                      (logical_and_expression
+                        (equality_expression
+                          (relational_expression
+                            (additive_expression
+                              (multiplicative_expression
+                                (string_operator_expression
+                                  (string_binary_operator_expression
+                                    (invocation_expression
+                                      (function_call_or_path_expression
+                                        (function_call_or_path_root
+                                          (primary_expression
+                                            (name_reference_with_data_scope
+                                              (simple_name_reference
+                                                (identifier_or_keyword_or_escaped_name
+                                                  (identifier_name
+                                                    (identifier)))))))))))))))))))))))))))
+
+==================
+BOM-prefixed input
+==================
+﻿print 1
+---
+
+(source_file
+  (query
+    (statement
+      (query_statement
+        (expression
+          (pipe_expression
+            (before_pipe_expression
+              (print_operator
+                (named_expression
+                  (unnamed_expression
+                    (logical_or_expression
+                      (logical_and_expression
+                        (equality_expression
+                          (relational_expression
+                            (additive_expression
+                              (multiplicative_expression
+                                (string_operator_expression
+                                  (string_binary_operator_expression
+                                    (invocation_expression
+                                      (function_call_or_path_expression
+                                        (function_call_or_path_root
+                                          (primary_expression
+                                            (unsigned_literal_expression
+                                              (long_literal_expression
+                                                (integer_literal)))))))))))))))))))))))))

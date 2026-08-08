@@ -1,0 +1,6 @@
+GeneralEvents
+.set "ready" = [One];
+// ^ keyword.directive
+//     ^ string
+//           ^ punctuation.delimiter
+//             ^ punctuation.bracket

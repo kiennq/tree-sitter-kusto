@@ -1,0 +1,10 @@
+GeneralEvents | take 10
+.create function QueryFn = {
+  SourceTable
+  | project Name = "ready"
+}
+.set "ready" = [One];
+// ^ keyword.directive
+//     ^ string
+//           ^ punctuation.delimiter
+//             ^ punctuation.bracket

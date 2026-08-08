@@ -1,0 +1,55 @@
+// query fixture comment
+// ^ comment
+   let threshold = 10;
+// ^ keyword
+//     ^ variable
+//                 ^ number
+   let Build = (input:string, maxRows:int = 2) {
+// ^ keyword
+//     ^ function
+//             ^ punctuation.bracket
+//              ^ variable.parameter
+//                          ^ punctuation.delimiter
+//                    ^ type
+//                            ^ variable.parameter
+//                                   ^ punctuation.delimiter
+//                                    ^ type
+      SourceTable
+      | take maxRows
+   };
+   SourceTable
+// ^ module
+   | where threshold > 0
+// ^ operator
+//   ^ keyword
+//         ^ variable
+   | where IsEnabled == true and EventTime >= datetime(2026-01-01) and Duration > 5m
+//   ^ keyword
+//                      ^ boolean
+//                   ^ operator
+//                                              ^ string.special
+//                                                                              ^ operator
+//                                                                                ^ number
+   | extend Name = strcat("ready", tostring(threshold)), Payload.value
+//   ^ keyword
+//          ^ property
+//                   ^ function.call
+//                        ^ string
+//                                   ^ function.call
+//                                                               ^ property
+   | extend RequestId = guid(01234567-89ab-cdef-0123-456789abcdef),
+//                       ^ constant
+      Payload = dynamic({"ok": true, "missing": null})
+//    ^ property
+//                      ^ punctuation.bracket
+//                             ^ boolean
+//                                 ^ punctuation.delimiter
+//                                              ^ constant.builtin
+//                                                  ^ punctuation.bracket
+   | union OtherTable
+//   ^ keyword
+//           ^ module
+   | project Name, Payload.value
+//   ^ keyword
+//           ^ property
+//                           ^ property

@@ -1,0 +1,61 @@
+// Deterministic standalone benchmark: query statements followed by generic commands.
+let StartTime = datetime(2026-01-01);
+let EndTime = datetime(2026-02-01);
+let BaseEvents =
+    GeneralEvents
+    | where EventTimestamp >= StartTime and EventTimestamp < EndTime
+    | where Service !in ("test", "synthetic")
+    | extend Payload = parse_json(RawPayload)
+    | extend Region = tostring(Payload.region),
+        Severity = tostring(Payload.severity),
+        DurationMs = todouble(Payload.duration_ms)
+    | project EventTimestamp, CorrelationId, Service, Region, Severity, DurationMs;
+
+let HourlyEvents =
+    BaseEvents
+    | summarize
+        EventCount = count(),
+        ServiceCount = dcount(Service),
+        AverageDurationMs = avg(DurationMs),
+        MaximumDurationMs = max(DurationMs)
+      by bin(EventTimestamp, 1h), Region, Severity;
+
+HourlyEvents
+| where EventCount > 0
+| extend Rate = round(todouble(EventCount) / 60.0, 3)
+| project EventTimestamp, Region, Severity, EventCount, ServiceCount, Rate
+| order by EventTimestamp asc, Region asc, Severity asc;
+
+BaseEvents
+| join kind=leftouter (
+    ServiceMetadata
+    | project Service, Owner, Tier
+  ) on Service
+| summarize
+    Requests = count(),
+    TotalDurationMs = sum(DurationMs),
+    P95DurationMs = percentile(DurationMs, 95)
+  by Owner, Tier, Region
+| extend AverageDurationMs = TotalDurationMs / Requests
+| order by P95DurationMs desc
+| take 100;
+
+BaseEvents
+| summarize Values = make_list(DurationMs, 32) by Service
+| mv-expand Values
+| extend DurationMs = todouble(Values)
+| summarize Samples = count(), AverageDurationMs = avg(DurationMs) by Service
+| render table;
+
+.show table GeneralEvents details
+.create-or-alter function with (docstring = "deterministic parser benchmark") BenchmarkEvents() {
+    GeneralEvents
+    | where EventTimestamp >= datetime(2026-01-01)
+    | summarize Events = count() by Service
+}
+.alter table GeneralEvents policy retention
+.set-or-replace table BenchmarkSettings <| {"name":"benchmark","version":1,"enabled":true}
+.ingest inline into table BenchmarkEvents <|
+2026-01-01T00:00:00Z;svc-a;"https://example.test/a//b";[unmatched
+2026-01-01T01:00:00Z;svc-b;'apostrophe';{still opaque};]
+.drop table BenchmarkObsolete;

@@ -1,0 +1,16 @@
+node_modules/
+target/
+build/
+prebuilds/
+.build/
+*.a
+*.so
+*.so.*
+*.dylib
+*.dll
+*.pc
+*.exp
+*.lib
+*.wasm
+*.obj
+*.o

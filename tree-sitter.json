@@ -1,0 +1,38 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "kusto",
+      "scope": "source.kusto",
+      "file-types": [
+        "kql"
+      ],
+      "highlights": "queries/highlights.scm",
+      "injections": "queries/injections.scm",
+      "injection-regex": "^(kusto|kql)$"
+    }
+  ],
+  "metadata": {
+    "version": "1.0.0",
+    "license": "MIT",
+    "description": "Kusto Query Language (KQL) grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "Amaan Qureshi"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/kiennq/tree-sitter-kusto"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": false,
+    "java": false,
+    "node": true,
+    "python": false,
+    "rust": true,
+    "swift": false,
+    "zig": false
+  }
+}

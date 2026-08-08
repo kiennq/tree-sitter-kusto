@@ -1,0 +1,281 @@
+==================
+canonical command seam
+==================
+﻿events
+| take 10
+// query-adjacent prose/comment
+// retained before the first command
+  .show table GeneralEvents.v1
+  .create function Foo =
+{
+  "body": { "nested": true }
+}
+  .alter-merge table GeneralEvents (
+    EventTime: datetime,
+    Service: string,
+    Payload: dynamic
+  )
+  .ingest inline <|
+https://example.test/a//b; 'apostrophe'; [unmatched
+{also unmatched; ] and ; semicolons
+  .set config = [One]   .drop table Archive
+
+ChangeDate 2026-08-07
+=====================
+  .show table Followup
+
+GeneralEvents
+| take 10
+---
+
+(source_file
+  (script_query_prefix)
+  (management_command
+    (command_start)
+    (command_word)
+    (command_body
+      (command_element
+        (command_atom
+          (command_name)))
+      (command_element
+        (command_atom
+          (command_name)))
+      (command_element
+        (command_punctuation
+          (command_punct)))
+      (command_element
+        (command_atom
+          (command_name))))
+    (command_end))
+  (management_command
+    (command_start)
+    (command_word)
+    (command_body
+      (command_element
+        (command_atom
+          (command_name)))
+      (command_element
+        (command_atom
+          (command_name)))
+      (command_element
+        (command_punctuation
+          (command_punct)))
+      (command_element
+        (command_group
+          (command_brace_body))))
+    (command_end))
+  (management_command
+    (command_start)
+    (command_word)
+    (command_body
+      (command_element
+        (command_atom
+          (command_name)))
+      (command_element
+        (command_atom
+          (command_name)))
+      (command_element
+        (command_group
+          (command_bracket)))
+      (command_element
+        (command_atom
+          (command_name)))
+      (command_element
+        (command_punctuation
+          (command_punct)))
+      (command_element
+        (command_atom
+          (command_name)))
+      (command_element
+        (command_punctuation
+          (command_punct)))
+      (command_element
+        (command_atom
+          (command_name)))
+      (command_element
+        (command_punctuation
+          (command_punct)))
+      (command_element
+        (command_atom
+          (command_name)))
+      (command_element
+        (command_punctuation
+          (command_punct)))
+      (command_element
+        (command_atom
+          (command_name)))
+      (command_element
+        (command_punctuation
+          (command_punct)))
+      (command_element
+        (command_atom
+          (command_name)))
+      (command_element
+        (command_group
+          (command_bracket))))
+    (command_end))
+  (management_command
+    (command_start)
+    (command_word)
+    (command_body
+      (command_element
+        (command_atom
+          (command_name)))
+      (command_element
+        (command_inline_data)))
+    (command_end))
+  (management_command
+    (command_start)
+    (command_word)
+    (command_body
+      (command_element
+        (command_atom
+          (command_name)))
+      (command_element
+        (command_punctuation
+          (command_punct)))
+      (command_element
+        (command_group
+          (command_bracket)))
+      (command_element
+        (command_atom
+          (command_name)))
+      (command_element
+        (command_group
+          (command_bracket))))
+    (command_end))
+  (management_command
+    (command_start)
+    (command_word)
+    (command_body
+      (command_element
+        (command_atom
+          (command_name)))
+      (command_element
+        (command_atom
+          (command_name))))
+    (command_end))
+  (script_preamble)
+  (management_command
+    (command_start)
+    (command_word)
+    (command_body
+      (command_element
+        (command_atom
+          (command_name)))
+      (command_element
+        (command_atom
+          (command_name))))
+    (command_end))
+  (script_query_prefix))
+
+==================
+pure GeneralEvents query control
+==================
+GeneralEvents
+| take 10
+---
+
+(source_file
+  (query
+    (statement
+      (query_statement
+        (expression
+          (pipe_expression
+            (before_pipe_expression
+              (unnamed_expression
+                (logical_or_expression
+                  (logical_and_expression
+                    (equality_expression
+                      (relational_expression
+                        (additive_expression
+                          (multiplicative_expression
+                            (string_operator_expression
+                              (string_binary_operator_expression
+                                (invocation_expression
+                                  (function_call_or_path_expression
+                                    (function_call_or_path_root
+                                      (primary_expression
+                                        (name_reference_with_data_scope
+                                          (simple_name_reference
+                                            (identifier_or_keyword_or_escaped_name
+                                              (identifier_name
+                                                (identifier)))))))))))))))))))
+            (piped_operator
+              (after_pipe_operator
+                (take_operator
+                  (named_expression
+                    (unnamed_expression
+                      (logical_or_expression
+                        (logical_and_expression
+                          (equality_expression
+                            (relational_expression
+                              (additive_expression
+                                (multiplicative_expression
+                                  (string_operator_expression
+                                    (string_binary_operator_expression
+                                      (invocation_expression
+                                        (function_call_or_path_expression
+                                          (function_call_or_path_root
+                                            (primary_expression
+                                              (unsigned_literal_expression
+                                                (long_literal_expression
+                                                  (integer_literal))))))))))))))))))))))))))
+
+==================
+generic command atoms and punctuation
+==================
+.show table 10 30d 100 < % # $ \ ^ } ~ @'single' @"double" h@'heredoc'
+---
+
+(source_file
+  (management_command
+    (command_start)
+    (command_word)
+    (command_body
+      (command_element
+        (command_atom
+          (command_name)))
+      (command_element
+        (command_atom
+          (command_name)))
+      (command_element
+        (command_atom
+          (command_name)))
+      (command_element
+        (command_atom
+          (command_name)))
+      (command_element
+        (command_punctuation
+          (command_punct)))
+      (command_element
+        (command_punctuation
+          (command_punct)))
+      (command_element
+        (command_punctuation
+          (command_punct)))
+      (command_element
+        (command_punctuation
+          (command_punct)))
+      (command_element
+        (command_punctuation
+          (command_punct)))
+      (command_element
+        (command_punctuation
+          (command_punct)))
+      (command_element
+        (command_punctuation
+          (command_punct)))
+      (command_element
+        (command_punctuation
+          (command_punct)))
+      (command_element
+        (command_literal
+          (command_string)))
+      (command_element
+        (command_literal
+          (command_string)))
+      (command_element
+        (command_literal
+          (command_string))))
+    (command_end)))
