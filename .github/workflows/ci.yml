@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+env:
+  NIX_EMACS_CI_REF: aee59a39572feb9c8f5f0a45294431196aa62bf5
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        emacs:
+          - emacs-release-snapshot
+          - emacs-snapshot
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ github.token }}
+      - name: Install Emacs
+        run: |
+          nix profile install --accept-flake-config \
+            "github:purcell/nix-emacs-ci?rev=${NIX_EMACS_CI_REF}#${{ matrix.emacs }}"
+          emacs --version
+      - run: npm ci
+      - run: npm test
+      - name: Build grammar for Emacs
+        run: |
+          mkdir -p build
+          cc -O2 -DNDEBUG -shared -fPIC -I src \
+            src/parser.c src/scanner.c \
+            -o build/libtree-sitter-kusto.so
+      - run: npm run test:emacs
